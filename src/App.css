@@ -71,3 +71,24 @@ button:hover {
   min-width: 300px;
   padding: 1rem;
 }
+
+
+@media (max-width: 768px) {
+  .form-qr-container {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .qr-container {
+    margin-top: 0;
+    margin-left: 20px;
+  }
+}
+@media (max-width: 320px) {
+   form{
+    width: 280px;
+    margin-left: 1rem;
+   }
+}
+
+
