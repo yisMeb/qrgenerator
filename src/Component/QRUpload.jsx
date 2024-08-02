@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Webcam from 'react-webcam';
 import jsQR from 'jsqr';
-import './QRUpload.css'; // Import the CSS file
 
 function QRUpload() {
   const [result, setResult] = useState('');
