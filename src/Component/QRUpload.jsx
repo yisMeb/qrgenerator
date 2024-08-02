@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { QrReader } from 'react-qr-reader';
 import Webcam from 'react-webcam';
 import jsQR from 'jsqr';
 
@@ -69,7 +68,27 @@ function QRUpload() {
               onClick={() => {
                 const screenshot = getScreenshot();
                 if (screenshot) {
-                  handleScan(screenshot);
+                  const canvas = document.createElement('canvas');
+                  const context = canvas.getContext('2d');
+                  const image = new Image();
+                  image.onload = () => {
+                    canvas.width = image.width;
+                    canvas.height = image.height;
+                    context.drawImage(image, 0, 0);
+                    const imageData = context.getImageData(
+                      0,
+                      0,
+                      canvas.width,
+                      canvas.height
+                    );
+                    const code = jsQR(imageData.data, imageData.width, imageData.height);
+                    if (code) {
+                      setResult(code.data);
+                    } else {
+                      alert('No QR code found.');
+                    }
+                  };
+                  image.src = screenshot;
                 }
               }}
             >
@@ -78,12 +97,6 @@ function QRUpload() {
           )}
         </Webcam>
       )}
-      <QrReader
-        delay={300}
-        onError={handleError}
-        onScan={handleScan}
-        style={{ width: '100%' }}
-      />
       <input type="file" accept="image/*" onChange={handleFileChange} />
       <p>Result: {result}</p>
     </div>
