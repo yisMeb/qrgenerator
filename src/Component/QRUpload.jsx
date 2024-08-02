@@ -5,13 +5,7 @@ import jsQR from 'jsqr';
 function QRUpload() {
   const [result, setResult] = useState('');
   const [isWebcamActive, setIsWebcamActive] = useState(false);
-
-  const handleScan = (data) => {
-    if (data) {
-      setResult(data);
-      setIsWebcamActive(false);
-    }
-  };
+ 
 
   const handleError = (err) => {
     console.error(err);
