@@ -91,4 +91,30 @@ button:hover {
    }
 }
 
+.qr-upload-container {
+  text-align: center;
+  padding: 20px;
+}
 
+.webcam-container {
+  position: relative;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.webcam-container video {
+  width: 100%;
+  height: auto;
+}
+
+.capture-button {
+  margin: 10px;
+}
+
+@media (max-width: 600px) {
+  .webcam-container {
+    width: 100%;
+    height: auto;
+  }
+}
