@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import FormComponent from './Component/formComponent';
 import QRComponent from './Component/QRComponent';
+import QRUpload from './Component/QRUpload';
 
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
           <QRComponent value={qrValue} />
         </div>
       )}
+    </div>
+    <div>
+      <QRUpload/>
     </div>
   </div>
   );
