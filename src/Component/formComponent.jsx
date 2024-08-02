@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 
-const FormComponent = ({ onSubmit }) => {
+function FormComponent({ onSubmit }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -14,7 +13,6 @@ const FormComponent = ({ onSubmit }) => {
       [name]: value,
     });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);

@@ -3,7 +3,7 @@ import QRCode  from 'qrcode.react';
  
  function QRComponent({value}) {
    return (
-     <div className='qr-code-container'>
+     <div className='qrcomponent'>
         <h3>QR</h3>
         <QRCode value={value}/>
      </div>
