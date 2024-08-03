@@ -21,11 +21,15 @@ function QRUpload() {
       image.src = e.target.result;
 
       image.onload = () => {
+        // Resize the image
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        canvas.width = image.width;
-        canvas.height = image.height;
-        context.drawImage(image, 0, 0, image.width, image.height);
+        const maxDimension = 600;
+        const scale = Math.min(maxDimension / image.width, maxDimension / image.height);
+        canvas.width = image.width * scale;
+        canvas.height = image.height * scale;
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
         const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         const code = jsQR(imageData.data, imageData.width, imageData.height);
         if (code) {
@@ -81,7 +85,7 @@ function QRUpload() {
             ref={fileInputRef} 
             style={{ display: 'none' }}
           />
-          <span className='uppic'> Upload picture</span>
+          <span className='uppic'>Upload picture</span>
         </label>
       </div>
       <p>{result}</p>
