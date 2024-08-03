@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
-import Webcam from 'react-webcam';
+import React, { useState, useRef } from 'react';
 import jsQR from 'jsqr';
+import { FaCamera } from "react-icons/fa";
 
 function QRUpload() {
   const [result, setResult] = useState('');
-  const [isWebcamActive, setIsWebcamActive] = useState(false);
- 
-  const handleError = (err) => {
-    console.error(err);
-  };
-
-  const toggleWebcam = () => {
-    setIsWebcamActive((prev) => !prev);
-  };
+  const cameraInputRef = useRef(null);
+  const fileInputRef = useRef(null);
+  const dropAreaRef = useRef(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
+    processFile(file);
+  };
+
+  const processFile = (file) => {
     const reader = new FileReader();
 
     reader.onload = (e) => {
@@ -41,60 +39,52 @@ function QRUpload() {
     reader.readAsDataURL(file);
   };
 
+  const handleCameraButtonClick = () => {
+    cameraInputRef.current.click();
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    processFile(file);
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div className="qr-upload-container">
       <h1>QR Code Reader</h1>
-      <button onClick={toggleWebcam}>
-        {isWebcamActive ? 'Stop Webcam' : 'Start Webcam'}
-      </button>
-      {isWebcamActive && (
-        <div className="webcam-container">
-          <Webcam
-            audio={false}
-            screenshotFormat="image/jpeg"
-            onUserMediaError={handleError}
-            videoConstraints={{
-              facingMode: 'environment',
-            }}
-          >
-            {({ getScreenshot }) => (
-              <button
-                className="capture-button"
-                onClick={() => {
-                  const screenshot = getScreenshot();
-                  if (screenshot) {
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    const image = new Image();
-                    image.onload = () => {
-                      canvas.width = image.width;
-                      canvas.height = image.height;
-                      context.drawImage(image, 0, 0);
-                      const imageData = context.getImageData(
-                        0,
-                        0,
-                        canvas.width,
-                        canvas.height
-                      );
-                      const code = jsQR(imageData.data, imageData.width, imageData.height);
-                      if (code) {
-                        setResult(code.data);
-                      } else {
-                        alert('No QR code found.');
-                      }
-                    };
-                    image.src = screenshot;
-                  }
-                }}
-              >
-                Capture
-              </button>
-            )}
-          </Webcam>
-        </div>
-      )}
-      <input type="file" accept="image/*" onChange={handleFileChange} />
-      <p>Result: {result}</p>
+      <input
+        type="file"
+        accept="image/*"
+        capture="environment"
+        onChange={handleFileChange}
+        ref={cameraInputRef}
+        style={{ display: 'none' }}
+      />
+      <button className='picbtn' onClick={handleCameraButtonClick}><FaCamera style={{fontSize:'26px'}}/></button>
+      
+      <div 
+        className="drop-area" 
+        ref={dropAreaRef}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+      >
+        Drag & Drop or 
+        <label className="upload-label">
+          <input 
+            type="file" 
+            accept="image/*" 
+            onChange={handleFileChange} 
+            ref={fileInputRef} 
+            style={{ display: 'none' }}
+          />
+          <span className='uppic'> Upload picture</span>
+        </label>
+      </div>
+      <p>{result}</p>
     </div>
   );
 }

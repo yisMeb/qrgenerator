@@ -96,25 +96,72 @@ button:hover {
   padding: 20px;
 }
 
-.webcam-container {
+.drop-area {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  width: 300px;
+  height: 90px;
+  margin: 2rem auto;
+  cursor: pointer;
+}
+
+.drop-area input[type="file"] {
+  display: none;
+}
+
+.drop-area:hover {
+  border-color: #aaa;
+}
+.uppic{
+  color: rgb(14, 131, 249);
+  font-weight: 600;
+  padding-left:5px ;
+  text-decoration: underline;
+}
+.uppic:hover{
+  color: #00b3ff;
+}
+.picbtn{
+  background-color: #4d828e;
+}
+.picbtn:hover{
+  transform: none;
+  background-color: #23505a;
+}
+
+.qr-upload-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.picbtn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.drop-area {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  width: 300px;
+  margin: 20px auto;
+  cursor: pointer;
   position: relative;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
 }
 
-.webcam-container video {
-  width: 100%;
-  height: auto;
+.upload-label {
+  cursor: pointer;
+  display: inline-block;
 }
 
-.capture-button {
-  margin: 10px;
+.drop-area input[type="file"] {
+  display: none;
 }
 
-@media (max-width: 600px) {
-  .webcam-container {
-    width: 100%;
-    height: auto;
-  }
+.drop-area:hover {
+  border-color: #aaa;
 }
