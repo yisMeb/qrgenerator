@@ -1,6 +1,7 @@
 const CACHE_NAME = 'my-cache-v1';
-let urlsToCache = [
+const urlsToCache = [
   '/',
+  '/index.html',
   '/static/js/bundle.js',
   '/static/js/1.chunk.js',
   '/static/js/main.chunk.js',
