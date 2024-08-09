@@ -9,7 +9,7 @@ function App() {
   
   const handleForm=(data)=>{ 
     
-    const Mydata = `Name: ${data.name}, Email: ${data.email}, Phone: ${data.phone}`;
+    const Mydata = `Name: ${data.name}\n Email: ${data.email}\n Phone: ${data.phone}`;
     setQrValue(Mydata);
   };
 

@@ -21,7 +21,6 @@ function QRUpload() {
       image.src = e.target.result;
 
       image.onload = () => {
-        // Resize the image
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
         const maxDimension = 600;
